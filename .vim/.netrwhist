@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/kkhaichau/.local'
+let g:netrw_dirhist_2='/home/kkhaichau/.nano'
+let g:netrw_dirhist_3='/home/kkhaichau/.oh-my-zsh'
+let g:netrw_dirhist_4='/home/kkhaichau/.config/i3'
+let g:netrw_dirhist_5='/home/kkhaichau/.vim/bundle/Vundle.vim'
+let g:netrw_dirhist_6='/mnt/c/Users/kkhai/wsl/harambae'
+let g:netrw_dirhist_7='/mnt/c/Users/kkhai/wsl/harambae/ANNOTATIONS'
