@@ -37,7 +37,7 @@ for file in $files; do
 done
 
 # install Vundle
-if [ ! -d ~/.vim/bundle/Vundle.vim/.git]; then
+if [ ! -d ~/.vim/bundle/Vundle.vim/.git ]; then
     echo "Installing Vundle"
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     echo "Done! Remember to run :PluginInstall in vim to install plugins!"
