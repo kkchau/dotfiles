@@ -33,8 +33,15 @@ for file in $files; do
     echo "Moving $file..."
     mv ~/$file $dir_old/
     echo "Replacing $file..."
-    ln -s $dir/${file} ~/$file
+    ln -sf $dir/${file} ~/$file
 done
+
+# install Vundle
+if [ ! -d ~/.vim/bundle/Vundle.vim/.git]; then
+    echo "Installing Vundle"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    echo "Done! Remember to run :PluginInstall in vim to install plugins!"
+fi
 
 install_zsh() {
     if [ ! -d "$dir/zsh" ]; then
