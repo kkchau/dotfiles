@@ -10,8 +10,7 @@
 
 dir=~/.dotfiles
 dir_old=~/.dotfiles_old
-files=".bashrc .zshrc .vimrc"
-directs=".oh-my-zsh .vim"
+files=".bashrc .zshrc .vimrc .aliases .oh-my-zsh .vim"
 
 ########## Messages
 
@@ -25,22 +24,16 @@ echo "Creating backup directory $dir_old"
 mkdir -p $dir_old
 
 # change to this repo
-echo "Chaning to new dotfiles directory $dir"
-cd $dir
+# echo "Changing to new dotfiles directory $dir"
+# cd $dir
 
 # backup
 echo "Backing up and replacing dotfiles"
-for file in files; do
+for file in $files; do
     echo "Moving $file..."
     mv ~/$file $dir_old/
     echo "Replacing $file..."
-    ln -s $dir/$file ~/$file
-done
-for directory in directs; do
-    echo "Moving $directory..."
-    mv ~/$file $dir_old/
-    echo "Replacing $directory..."
-    ln -s $dir/$directory ~/$directory
+    ln -s $dir/${file} ~/$file
 done
 
 install_zsh() {

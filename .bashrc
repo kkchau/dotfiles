@@ -1,7 +1,7 @@
 export DISPLAY=localhost:0
 
 # automatically start zsh instead of bash
-if test -t 1; then
+if test -t 1 && [ -f /usr/bin/zsh ] || [ -f /usr/bin/zsh ]; then
     exec zsh
 fi
 
@@ -105,8 +105,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -124,19 +124,8 @@ fi
 # User begin here
 
 # bash prompt
-PS1='\e[46;96m\u@\h:/.../${PWD#"${PWD%/*/*}/"}\e[m \$ '
+PS1='\u@\h:/../${PWD#"${PWD%/*/*}/"} \$ '
 
 # better terminal colors
 #LS_COLORS=$LS_COLORS:'di=0;96:ln=1;96:fi=0;32:ex=0;92:';
 #export LS_COLORS
-
-# Aliases
-### Comamands
-# safe remove
-alias rm='rm -i'
-
-# personal windows cd
-alias home='cd /mnt/c/Users/kkhai'
-
-# ssh with remote port forwarding and X11
-alias sshfwd='ssh -X -R 52698:localhost:52698'

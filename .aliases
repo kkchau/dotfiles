@@ -1,0 +1,13 @@
+########## All of my aliases
+
+## General commands
+alias cdw='cd /mnt/c/Users/kkhai/wsl'
+alias ll='ls -alF --group-directories-first'
+alias rm='rm -i'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+## SSH
+alias ieng6='ssh -X kkchau@ieng6.ucsd.edu'
+alias comet='ssh -X kkchau@comet.sdsc.edu'
