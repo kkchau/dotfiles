@@ -10,7 +10,7 @@
 
 dir=~/.dotfiles
 dir_old=~/.dotfiles_old
-files=".bashrc .zshrc .vimrc .aliases .oh-my-zsh .vim"
+files=".bashrc .zshrc .vimrc .aliases .tmux.conf .oh-my-zsh .vim"
 
 ########## Messages
 
