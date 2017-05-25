@@ -1,8 +1,10 @@
 export DISPLAY=localhost:0
 
 # automatically start zsh instead of bash
-if test -t 1 && [ -f /usr/bin/zsh ] || [ -f /usr/bin/zsh ]; then
-    exec zsh
+if test -t 1 && [ $USER != 'kkchau' ]; then
+    if [ -f /bin/zsh ] || [ -f /usr/bin/zsh ]; then
+        exec zsh
+    fi
 fi
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
