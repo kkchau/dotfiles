@@ -83,3 +83,7 @@ setopt NO_BEEP
 if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
+
+if [ -f ~/.local_aliases ]; then
+    . ~/.local_aliases
+fi
