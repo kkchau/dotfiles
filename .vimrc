@@ -72,8 +72,8 @@ set visualbell
 " Color scheme
 set background=dark
 colorscheme slate
-let g:airline_powerline_fonts=1
-let g:airline_theme='papercolor'
+" let g:airline_powerline_fonts=1
+let g:airline_theme='raven'
 set t_Co=256
 
 " Status Line
