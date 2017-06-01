@@ -7,6 +7,7 @@ alias rm='rm -i'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias tmux='tmux -2'
 
 ## SSH
 alias ieng6='ssh -X kkchau@ieng6.ucsd.edu'

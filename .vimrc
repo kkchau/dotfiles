@@ -74,7 +74,8 @@ set background=dark
 colorscheme slate
 " let g:airline_powerline_fonts=1
 let g:airline_theme='term'
-" set t_Co=256
+set t_Co=16
+" set term=screen-256color
 
 " Status Line
 set laststatus=2
