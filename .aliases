@@ -2,7 +2,7 @@
 
 ## General commands
 alias cdw='cd /mnt/c/Users/kkhai/wsl'
-alias ll='ls -alF --group-directories-first'
+alias ll='ls -alFX --group-directories-first'
 alias rm='rm -i'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
