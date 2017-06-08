@@ -1,7 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/home/kkhaichau/.tmux.conf'
 let g:netrw_dirhist_2='/home/kkhaichau/.vim'
 let g:netrw_dirhist_3='/mnt/c/Users/kkhai/wsl/BIMM-185-FINAL-PROJECT/.git'
 let g:netrw_dirhist_4='/mnt/c/Users/kkhai/wsl/BIMM-185-FINAL-PROJECT'
 let g:netrw_dirhist_5='/mnt/c/Users/kkhai/wsl/harambae/VOCABULARY'
+let g:netrw_dirhist_6='/mnt/c/Users/kkhai/wsl/harambae/cse182/cse182'
+let g:netrw_dirhist_7='/mnt/c/Users/kkhai/wsl/harambae/cse182/anno_table/templates'
+let g:netrw_dirhist_8='/mnt/c/Users/kkhai/wsl/harambae/cse182/ANNOTATIONS/raw_aligns'
