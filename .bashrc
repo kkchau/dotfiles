@@ -132,6 +132,6 @@ fi
 # bash prompt
 PS1='\u@\h:/../${PWD#"${PWD%/*/*}/"} \$ '
 
-# better terminal colors
-#LS_COLORS=$LS_COLORS:'di=0;96:ln=1;96:fi=0;32:ex=0;92:';
-#export LS_COLORS
+# terminal colors
+LS_COLORS=$LS_COLORS:'fi=0;32:';
+export LS_COLORS
