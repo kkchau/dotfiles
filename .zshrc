@@ -84,6 +84,10 @@ if [ -f ~/.aliases ]; then
     . ~/.aliases
 fi
 
+if [ -f ~/.local-aliases ]; then
+    . ~/.local-aliases
+fi
+
 if [ -f ~/.local_aliases ]; then
     . ~/.local_aliases
 fi
