@@ -2,7 +2,8 @@
 
 ## General commands
 alias cdw='cd /mnt/c/Users/kkhai/wsl'
-alias ll='ls -AlFX --group-directories-first'
+alias ll='ls -AlFpX --group-directories-first'
+alias l='ls -lFpX --group-directories-first'
 alias rm='rm -i'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -12,3 +13,7 @@ alias tmux='tmux -2'
 ## SSH
 alias ieng6='ssh -X kkchau@ieng6.ucsd.edu'
 alias comet='ssh -X kkchau@comet.sdsc.edu'
+
+# Git
+alias gitread='git add *; git commit -m "updated readme"; git push origin master'
+alias gitgud='git add *; git commit -m "bug fixes"; git push origin master'
