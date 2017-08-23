@@ -91,3 +91,6 @@ fi
 if [ -f ~/.local_aliases ]; then
     . ~/.local_aliases
 fi
+
+# ls colors
+eval "$(dircolors ~/.dircolors)"

@@ -133,5 +133,6 @@ fi
 PS1='\u@\h:/../${PWD#"${PWD%/*/*}/"} \$ '
 
 # terminal colors
-LS_COLORS=$LS_COLORS:'fi=0;32:';
-export LS_COLORS
+eval "$(dircolors ~/.dircolors)";
+# LS_COLORS=$LS_COLORS:'fi=0;32:ex=0:di=5:';
+# export LS_COLORS
