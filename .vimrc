@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,10 +60,14 @@ set confirm
 set splitbelow
 set splitright
 
+" split navigation
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
+
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
 
 
 "----Style--------------------------------------------------------------------"
@@ -88,6 +93,9 @@ set nowrap
 
 " Persistent ruler
 set ruler
+
+" Auto NERDTree
+autocmd vimenter * NERDTree
 
 "----Syntax-------------------------------------------------------------------"
 syntax enable
