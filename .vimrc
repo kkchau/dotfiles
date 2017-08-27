@@ -42,7 +42,7 @@ set wildmenu
 set showcmd
 
 
-"----Usability----------------------------------------------------------------"
+"----Usability and Functionality----------------------------------------------"
 " Case-insensitive search expt when CAP
 set ignorecase
 set smartcase
@@ -68,6 +68,7 @@ map <C-L> <C-W>l
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 "----Style--------------------------------------------------------------------"
