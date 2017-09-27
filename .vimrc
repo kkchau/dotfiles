@@ -68,7 +68,7 @@ map <C-L> <C-W>l
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 "----Style--------------------------------------------------------------------"
@@ -96,7 +96,7 @@ set nowrap
 set ruler
 
 " Auto NERDTree
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 
 "----Syntax-------------------------------------------------------------------"
 syntax enable
