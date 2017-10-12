@@ -134,5 +134,6 @@ PS1='\u@\h:/../${PWD#"${PWD%/*/*}/"} \$ '
 
 # terminal colors
 eval "$(dircolors ~/.dircolors)";
-# LS_COLORS=$LS_COLORS:'fi=0;32:ex=0:di=5:';
-# export LS_COLORS
+
+### comet path
+export PATH="$HOME/neovim/bin:$PATH"

@@ -1,11 +1,2 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/kkhaichau/.tmux.conf'
-let g:netrw_dirhist_2='/home/kkhaichau/.vim'
-let g:netrw_dirhist_3='/mnt/c/Users/kkhai/wsl/BIMM-185-FINAL-PROJECT/.git'
-let g:netrw_dirhist_4='/mnt/c/Users/kkhai/wsl/BIMM-185-FINAL-PROJECT'
-let g:netrw_dirhist_5='/mnt/c/Users/kkhai/wsl/harambae/VOCABULARY'
-let g:netrw_dirhist_6='/home/kkchau/python_scripts'
-let g:netrw_dirhist_7='/home/kkchau/shell_scripts/differential'
-let g:netrw_dirhist_8='/home/kkchau/shell_scripts'
-let g:netrw_dirhist_9='/home/kkchau/shell_scripts/differential'
+let g:netrw_dirhist_cnt =0
