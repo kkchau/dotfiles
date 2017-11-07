@@ -140,7 +140,7 @@ export PATH=$PATH:/mnt/c/Users/kkhai/wsl/test/edirect
 
 
 # comet-specific
-if test -t 1 && [ $USER != 'kkchau' ]; then
+if test -t 1 && [ $USER == 'kkchau' ]; then
     export PATH="$HOME/neovim/bin:$PATH"
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/java/latest/jre/lib/amd64/server"
     export MALLOC_ARENA_MAX=4
