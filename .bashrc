@@ -135,5 +135,7 @@ PS1='\u@\h:/../${PWD#"${PWD%/*/*}/"} \$ '
 # terminal colors
 eval "$(dircolors ~/.dircolors)";
 
-### comet path
+### comet paths and exports
 export PATH="$HOME/neovim/bin:$PATH"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/java/latest/jre/lib/amd64/server"
+export MALLOC_ARENA_MAX=4
