@@ -134,8 +134,14 @@ PS1='\u@\h:/../${PWD#"${PWD%/*/*}/"} \$ '
 
 # terminal colors
 eval "$(dircolors ~/.dircolors)";
+# LS_COLORS=$LS_COLORS:'fi=0;32:ex=0:di=5:';
+# export LS_COLORS
+export PATH=$PATH:/mnt/c/Users/kkhai/wsl/test/edirect
 
-### comet paths and exports
-export PATH="$HOME/neovim/bin:$PATH"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/java/latest/jre/lib/amd64/server"
-export MALLOC_ARENA_MAX=4
+
+# comet-specific
+if test -t 1 && [ $USER != 'kkchau' ]; then
+    export PATH="$HOME/neovim/bin:$PATH"
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/java/latest/jre/lib/amd64/server"
+    export MALLOC_ARENA_MAX=4
+fi
