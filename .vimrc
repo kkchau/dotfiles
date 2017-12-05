@@ -120,3 +120,7 @@ set autoindent
 
 " Regular Expressions
 set magic
+
+" Snakemake
+au BufNewFile,BufRead Snakefile set syntax=snakemake
+au BufNewFile,BufRead *.smk set syntax=snakemake
