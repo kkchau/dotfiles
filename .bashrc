@@ -145,3 +145,7 @@ if test -t 1 && [ $USER == 'kkchau' ]; then
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/java/latest/jre/lib/amd64/server"
     export MALLOC_ARENA_MAX=4
 fi
+
+
+# start python
+source $HOME/.python/.virtualenv/py36/bin/activate
