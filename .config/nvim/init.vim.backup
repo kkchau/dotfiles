@@ -17,6 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
+Plugin 'jalvesaq/Nvim-R'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -78,8 +79,8 @@ set visualbell
 " Color scheme
 set background=dark
 colorscheme slate
-let g:airline_powerline_fonts=0
-let g:airline_theme='papercolor'
+let g:airline_powerline_fonts=1
+let g:airline_theme='ravenpower'
 " set t_Co=16
 " set term=screen-256color
 
@@ -120,7 +121,3 @@ set autoindent
 
 " Regular Expressions
 set magic
-
-" Snakemake
-au BufNewFile,BufRead Snakefile set syntax=snakemake
-au BufNewFile,BufRead *.smk set syntax=snakemake
