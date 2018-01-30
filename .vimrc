@@ -1,4 +1,5 @@
 set nocompatible
+set encoding=utf-8
 
 
 "----Vundle-------------------------------------------------------------------"
@@ -69,6 +70,11 @@ map <C-L> <C-W>l
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Code folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
 
 
 "----Style--------------------------------------------------------------------"

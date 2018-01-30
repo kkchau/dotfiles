@@ -10,7 +10,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias tmux='tmux -2'
 
-## SSH
+# SSH
 alias ieng6='ssh -X kkchau@ieng6.ucsd.edu'
 alias comet='ssh -X kkchau@comet.sdsc.edu'
 alias cometexec='ssh -t kkchau@comet.sdsc.edu'
@@ -18,3 +18,8 @@ alias cometexec='ssh -t kkchau@comet.sdsc.edu'
 # Git
 alias gitread='git add .; git commit -m "updated readme"; git push origin master'
 alias gitgud='git add .; git commit -m "bug fixes"; git push origin master'
+
+# COMET
+function scratchup() {
+    scp -r $1 comet:/oasis/scratch/comet/kkchau/temp_project/
+}
