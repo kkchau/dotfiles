@@ -84,10 +84,10 @@ set visualbell
 " Color scheme
 set background=dark
 colorscheme slate
-let g:airline_powerline_fonts=1
-let g:airline_theme='ravenpower'
+let g:airline_powerline_fonts=0
+let g:airline_theme='papercolor'
 " set t_Co=16
-set term=screen-256color
+" set term=screen-256color
 
 " Status Line
 set laststatus=2
