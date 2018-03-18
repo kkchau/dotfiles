@@ -78,6 +78,7 @@ set foldlevel=99
 nnoremap <space> za
 
 
+
 "----Style--------------------------------------------------------------------"
 " Visual bell instead of audible bell
 set visualbell

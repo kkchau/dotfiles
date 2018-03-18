@@ -2,6 +2,9 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export DISPLAY=localhost:0.0
 export DOCKER_HOST=localhost:2375
+export NVM_LAZY_LOAD=true
+
+
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -18,7 +21,7 @@ prompt_context(){}
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -36,7 +39,7 @@ prompt_context(){}
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -56,6 +59,7 @@ prompt_context(){}
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+plugins+=(zsh-nvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -88,10 +92,6 @@ fi
 
 if [ -f ~/.local-aliases ]; then
     . ~/.local-aliases
-fi
-
-if [ -f ~/.local_aliases ]; then
-    . ~/.local_aliases
 fi
 
 # ls colors

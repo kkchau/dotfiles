@@ -144,6 +144,6 @@ if test -t 1 && [ $USER == 'kkchau' ]; then
     export MALLOC_ARENA_MAX=4
 fi
 
-
-# start python
-source $HOME/.python/.virtualenv/py36/bin/activate
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

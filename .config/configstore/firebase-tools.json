@@ -1,0 +1,37 @@
+{
+	"analytics-uuid": "9e2e0e30-12a2-4c2b-928b-6225e7fb8e66",
+	"motd": {
+		"minVersion": "3.0.5"
+	},
+	"motd.fetched": 1521255951171,
+	"usage": false,
+	"user": {
+		"azp": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"aud": "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+		"sub": "103834350496261022204",
+		"email": "kkhaichau@gmail.com",
+		"email_verified": true,
+		"at_hash": "e5IdNa4gyoTbVc2grf8LDw",
+		"exp": 1520574038,
+		"iss": "accounts.google.com",
+		"iat": 1520570438
+	},
+	"tokens": {
+		"expires_at": 1521269822386,
+		"refresh_token": "1/CQPoBZQcQ8WygY48BNsOTrLmqBNtsFQfNxzI4tF1-SF_mprGd0KpC9SnmaUdMH8D",
+		"scopes": [
+			"email",
+			"https://www.googleapis.com/auth/cloud-platform",
+			"https://www.googleapis.com/auth/cloudplatformprojects.readonly",
+			"https://www.googleapis.com/auth/firebase",
+			"openid"
+		],
+		"access_token": "ya29.GlyBBaSHfKl05S-QTL_kaYy0ezDRU7Wy7J4fh9hSOQTQZLS6Xq86turTGbMawFoP-Kiynn3ZXcY6Gq3suXeoPJzaOjBGzTy_dYiPpqgh_OUvGjgCnf9btjUJZLjiUQ",
+		"token_type": "Bearer",
+		"expires_in": 3600,
+		"id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImM2ZjBlZTE2YmU3MGM0ODhkZDM5ZGI3MGY2ZjRkMTM3YTA0ODkxZTMifQ.eyJhenAiOiI1NjM1ODQzMzU4NjktZmdyaGdtZDQ3YnFuZWtpajVpOGI1cHIwM2hvODQ5ZTYuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1NjM1ODQzMzU4NjktZmdyaGdtZDQ3YnFuZWtpajVpOGI1cHIwM2hvODQ5ZTYuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDM4MzQzNTA0OTYyNjEwMjIyMDQiLCJlbWFpbCI6ImtraGFpY2hhdUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InhlamVRVXNtT09GVGotb1BLZzRQU1EiLCJleHAiOjE1MjEyNjk4MjIsImlzcyI6ImFjY291bnRzLmdvb2dsZS5jb20iLCJpYXQiOjE1MjEyNjYyMjJ9.LQGJouDzvqUkxht1vtiuTMZF9BWwQVbiPChxrXSeNbgWGtqNNSjX65Dvw-Gq4YiU_sfY5yLiNidYZcwdmLIpFfD7rIX296E0x_B_gS9lZ6G6JQeitXWPR0RFxrLeqNAI1dYW_7eInCIDmLoUWa8IrdVKtlg63tQiCwWKnOElJ2i1UJKiR5frCWOeffUgAJpq6a37Q3eFVhex2d34T7qBH7LPmfTexOdaaZSP0il_iEPS96YzI478JJVsljaZn_0BvLiqmNJR2WEFCYG3x7iN6H86Hl7YSzNg5dPlEgWM5Ln27Bwy20deCc2nbLZf2J7K5ZqWsqPSVIjVpGviutxPRg"
+	},
+	"activeProjects": {
+		"/mnt/c/Users/kkhai/wsl/test_firebase": "testproject-2d0c2"
+	}
+}
