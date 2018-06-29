@@ -1,3 +1,6 @@
 # .dotfiles
 
-TODO: options for exclusions
+TODO: 
+- options for exclusions
+- Update README for usage
+- Specify platforms
