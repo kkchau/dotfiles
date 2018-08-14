@@ -1,10 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export DISPLAY=localhost:0.0
-export DOCKER_HOST=localhost:2375
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export NVM_LAZY_LOAD=true
-
-
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -96,3 +94,8 @@ fi
 
 # ls colors
 eval "$(dircolors ~/.dircolors)"
+fpath=($fpath "/home/kkhaichau/.zfunctions")
+
+  # Set Spaceship ZSH as a prompt
+  autoload -U promptinit; promptinit
+  prompt spaceship

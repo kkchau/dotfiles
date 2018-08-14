@@ -19,6 +19,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jalvesaq/Nvim-R'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'benmills/vimux'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -77,6 +79,16 @@ set foldmethod=indent
 set foldlevel=99
 nnoremap <space> za
 
+" Vimux
+" Prompt for a command to run
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+" Zoom the tmux runner pane
+<Leader>vz :VimuxZoomRunner<CR>
+
 
 
 "----Style--------------------------------------------------------------------"
@@ -132,3 +144,4 @@ set magic
 " Snakemake
 au BufNewFile,BufRead Snakefile set syntax=snakemake
 au BufNewFile,BufRead *.smk set syntax=snakemake
+

@@ -1,10 +1,3 @@
-# automatically start zsh instead of bash
-if test -t 1 && [ $USER != 'kkchau' ]; then
-    if [ -f /bin/zsh ] || [ -f /usr/bin/zsh ]; then
-        exec zsh
-    fi
-fi
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
