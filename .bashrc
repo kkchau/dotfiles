@@ -129,7 +129,6 @@ eval "$(dircolors ~/.dircolors)";
 # export LS_COLORS
 export PATH=$PATH:/mnt/c/Users/kkhai/wsl/test/edirect
 
-
 # comet-specific
 if test -t 1 && [ $USER == 'kkchau' ]; then
     export PATH="$HOME/neovim/bin:$PATH"

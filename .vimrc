@@ -21,6 +21,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
+Plugin 'junegunn/goyo.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -50,6 +51,9 @@ set showcmd
 " Case-insensitive search expt when CAP
 set ignorecase
 set smartcase
+
+" Use mouse
+set mouse=a
 
 " Backspace over indents, endofline, insrt
 set backspace=indent,eol,start
@@ -87,7 +91,9 @@ map <Leader>vl :VimuxRunLastCommand<CR>
 " Inspect runner pane
 map <Leader>vi :VimuxInspectRunner<CR>
 " Zoom the tmux runner pane
-<Leader>vz :VimuxZoomRunner<CR>
+map <Leader>vz :VimuxZoomRunner<CR>
+" Vertical split
+let g:VimuxOrientation="h"
 
 
 

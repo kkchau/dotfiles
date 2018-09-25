@@ -14,3 +14,13 @@ alias tmux='tmux -2'
 alias gitread='git add .; git commit -m "updated readme"; git push origin master'
 alias gitgud='git add .; git commit -m "bug fixes"; git push origin master'
 
+# Everything Neovim
+alias vi='/usr/bin/nvim'
+alias vim='/usr/bin/nvim'
+alias v='/usr/bin/nvim'
+
+# SSHFS
+alias mntcomet='sshfs comet:/home/kkchau /home/kkhaichau/Remote -o reconnect,follow_symlinks,ServerAliveInterval=15,IdentityFile=~/.ssh/id_rsa'
+
+# PottyBuddy
+alias pbmysql='mysql -u kkchau -h 206.189.167.71 -p'

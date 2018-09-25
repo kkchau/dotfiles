@@ -1,0 +1,18 @@
+2018/09/24-21:53:03.442 5231 Reusing MANIFEST /home/kkhaichau/.config/google-chrome/Default/Session Storage/MANIFEST-000001
+2018/09/24-21:53:03.442 5231 Recovering log #592
+2018/09/24-21:53:03.442 5231 Reusing old log /home/kkhaichau/.config/google-chrome/Default/Session Storage/000592.log 
+2018/09/24-22:00:09.497 6364 Level-0 table #596: started
+2018/09/24-22:00:09.503 6364 Level-0 table #596: 18472 bytes OK
+2018/09/24-22:00:09.507 6364 Delete type=0 #592
+2018/09/24-22:00:09.508 6364 Compacting 4@0 + 1@1 files
+2018/09/24-22:00:09.521 6364 Generated table #597@0: 3604 keys, 103860 bytes
+2018/09/24-22:00:09.521 6364 Compacted 4@0 + 1@1 files => 103860 bytes
+2018/09/24-22:00:09.525 6364 compacted to: files[ 0 1 1 0 0 0 0 ]
+2018/09/24-22:00:09.526 6364 Delete type=2 #596
+2018/09/24-22:00:09.526 6364 Delete type=2 #589
+2018/09/24-22:00:09.526 6364 Delete type=2 #587
+2018/09/24-22:00:09.526 6364 Delete type=2 #591
+2018/09/24-22:00:09.526 6364 Delete type=2 #593
+2018/09/24-22:11:39.380 6364 Level-0 table #599: started
+2018/09/24-22:11:39.387 6364 Level-0 table #599: 30664 bytes OK
+2018/09/24-22:11:39.392 6364 Delete type=0 #595
