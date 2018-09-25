@@ -5,3 +5,6 @@ eog/
 ibus/
 matplotlib/
 pulse/
+.config/
+
+!.config/nvim/
