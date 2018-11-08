@@ -1,10 +1,4 @@
 *.swp
-configstore/
-dconf/
-eog/
-ibus/
-matplotlib/
-pulse/
-.config/
+.config/*
 
 !.config/nvim/

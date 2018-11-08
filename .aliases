@@ -9,6 +9,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias tmux='tmux -2'
+alias hs='history | grep'
 
 # Git
 alias gitread='git add .; git commit -m "updated readme"; git push origin master'
@@ -22,5 +23,3 @@ alias v='/usr/bin/nvim'
 # SSHFS
 alias mntcomet='sshfs comet:/home/kkchau /home/kkhaichau/Remote -o reconnect,follow_symlinks,ServerAliveInterval=15,IdentityFile=~/.ssh/id_rsa'
 
-# PottyBuddy
-alias pbmysql='mysql -u kkchau -h 206.189.167.71 -p'

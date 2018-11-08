@@ -1,9 +1,0 @@
-2018/09/24-21:01:07.186 3003 Reusing MANIFEST /home/kkhaichau/.config/google-chrome/Default/IndexedDB/https_comicbook.com_0.indexeddb.leveldb/MANIFEST-000001
-2018/09/24-21:01:07.344 2732 Current memtable full; waiting...
-2018/09/24-21:01:07.344 21169 Level-0 table #5: started
-2018/09/24-21:01:07.350 21169 Level-0 table #5: 362 bytes OK
-2018/09/24-21:01:07.355 21169 Delete type=0 #3
-2018/09/24-21:01:07.355 21169 Level-0 table #7: started
-2018/09/24-21:01:07.355 21169 Level-0 table #7: 0 bytes OK
-2018/09/24-21:01:07.360 21169 Delete type=0 #4
-2018/09/24-21:01:07.360 21169 Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)

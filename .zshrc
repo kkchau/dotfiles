@@ -13,6 +13,7 @@ export ZSH=~/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="agnoster"
+ZSH_THEME=""
 DEFAULT_USER=kkhai
 prompt_context(){}
 
@@ -102,3 +103,5 @@ fi
 # Set Spaceship ZSH as a prompt
 # autoload -U promptinit; promptinit
 # prompt spaceship
+autoload -U promptinit; promptinit
+prompt pure
