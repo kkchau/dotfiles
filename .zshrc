@@ -95,9 +95,10 @@ if [ -f ~/.local-aliases ]; then
 fi
 
 # ls colors
-eval "$(dircolors ~/.dircolors)"
-fpath=($fpath "/home/kkhaichau/.zfunctions")
+# eval "$(dircolors ~/.dircolors)"
+# fpath=($fpath "/home/kkhaichau/.zfunctions")
 
+# NOW USING PURE
 # Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
+# autoload -U promptinit; promptinit
+# prompt spaceship
