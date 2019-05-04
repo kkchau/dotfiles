@@ -14,14 +14,17 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-" Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'raimondi/delimitmate'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jalvesaq/Nvim-R'
+Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
 Plugin 'junegunn/goyo.vim'
+Plugin 'NLKNguyen/papercolor-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -46,6 +49,7 @@ set wildmenu
 " Show partial commands in the last line
 set showcmd
 
+nnoremap <leader> " "
 
 "----Usability and Functionality----------------------------------------------"
 " Case-insensitive search expt when CAP
@@ -76,12 +80,15 @@ map <C-L> <C-W>l
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Code folding
-set foldmethod=indent
-set foldlevel=99
-nnoremap <space> za
+" Vimtex
+let g:tex_flavor='pdflatex'
+" let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+let g:livepreview_previewer='open -a preview'
 
 " Vimux
 " Prompt for a command to run
@@ -95,15 +102,24 @@ map <Leader>vz :VimuxZoomRunner<CR>
 " Vertical split
 let g:VimuxOrientation="h"
 
-
+" Terminal escape
+tnoremap <Esc> <C-\><C-n>
 
 "----Style--------------------------------------------------------------------"
 " Visual bell instead of audible bell
 set visualbell
 
 " Color scheme
+set termguicolors
 set background=dark
-colorscheme slate
+let g:PaperColor_Theme_Options = {
+ \    'theme': {
+ \        'default': {
+ \            'transparent_background': 1
+ \        }
+ \    }
+ \ }
+colorscheme PaperColor
 let g:airline_powerline_fonts=0
 let g:airline_theme='papercolor'
 " set t_Co=16
@@ -150,4 +166,3 @@ set magic
 " Snakemake
 au BufNewFile,BufRead Snakefile set syntax=snakemake
 au BufNewFile,BufRead *.smk set syntax=snakemake
-
