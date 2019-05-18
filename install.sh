@@ -1,51 +1,83 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#############################################################################
-#                                                                           #
-# Creates symlinks to dotfiles in this repository                           #
-#                                                                           #
-#############################################################################
+# This script must be executed from within the .dotfiles directory
+INSTALL_DIR=$(pwd)
 
-########## Variables
+DOTFILES=(.environment .tmux.conf .tmux.conf.local .vimrc)
 
-dir=~/.dotfiles
-dir_old=~/.dotfiles_old
-files=".bashrc .zshrc .vimrc .aliases .tmux.conf .inputrc .oh-my-zsh .vim .config"
-
-########## Messages
-
-usage="$(basename "$0") -- Create symlinks to provided dotfiles" 
-
-##########
-
-
-# old dotfiles
-echo "Creating backup directory $dir_old"
-mkdir -p $dir_old
-
-# change to this repo
-# echo "Changing to new dotfiles directory $dir"
-# cd $dir
-
-# backup
-echo "Backing up and replacing dotfiles"
-for file in $files; do
-    echo "Moving $file..."
-    mv ~/$file $dir_old/
-    echo "Replacing $file..."
-    ln -sf $dir/${file} ~/$file
+# Symlink dotfiles
+for dotfile in ${DOTFILES[@]}; do
+    ln -s ${INSTALL_DIR}/${dotfile} ~/${dotfile} 
 done
 
-# install Vundle
-if [ ! -d ~/.vim/bundle/Vundle.vim/.git ]; then
-    echo "Installing Vundle"
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    echo "Done! Remember to run :PluginInstall in vim to install plugins!"
+# Generate SSH key
+if [ ! -f ~/.ssh/id_rsa ]; then
+    ssh-keygen -t rsa -b 4096 -C "kkhaichau@gmail.com"
+    eval "$(ssh-agent -s)"
 fi
 
-install_zsh() {
-    if [ ! -d "$dir/zsh" ]; then
-        mkdir -p $dir/zsh
-        wget -qO - ftp://ftp.zsh.org/pub/zsh.tar.gz | tar -xzvf -C $dir/zsh
+# Install oh-my-zsh
+if [ ! -d ~/.oh-my-zsh ]; then
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
+
+# Source environment file
+if ! grep -Fxq "source ~/.environment" ~/.zshrc; then
+    echo "source ~/.environment" >> ~/.zshrc
+fi
+
+# If using macOS, get Homebrew
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo "Currently using a ${machine} OS"
+
+if [ ${machine} == "Mac" ]; then
+
+    # Mac specific SSH config
+    if ! grep -Fxq "Host *" ~/.ssh/config; then
+        echo "Updating SSH config"
+        echo "Host *
+    AddKeysToAgent yes
+    UseKeychain yes
+    IdentityFile ~/.ssh/id_rsa
+    " >> ~/.ssh/config
+        ssh-add -K ~/.ssh/id_rsa
     fi
-}
+
+    # Brew
+    if ! command -v brew; then
+        echo "Installing Homebrew"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+
+    BREW_INSTALL_TARGETS=(macvim cmake tmux)
+
+    echo "Installing brew packages"
+    for package in ${BREW_INSTALL_TARGETS[@]}; do
+        if ! command -v ${package}; then
+            brew install ${package}
+        fi
+    done
+
+fi
+
+# Get Vundle
+if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+
+# Set up Vundle plugins
+vim -c ":PluginInstall" -c "qa!"
+
+# If using YouCompleteMe, install it
+if [ -d ~/.vim/bundle/YouCompleteMe ]; then
+    cd ~/.vim/bundle/YouCompleteMe
+    ./install.py
+    cd ${INSTALL_DIR}
+fi

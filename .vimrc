@@ -19,12 +19,12 @@ Plugin 'raimondi/delimitmate'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-vinegar'
 Plugin 'jalvesaq/Nvim-R'
-Plugin 'xuhdev/vim-latex-live-preview'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'benmills/vimux'
-Plugin 'junegunn/goyo.vim'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'kana/vim-arpeggio'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -49,15 +49,23 @@ set wildmenu
 " Show partial commands in the last line
 set showcmd
 
-nnoremap <leader> " "
+" New leader
+let mapleader = " "
+let maplocalleader = "  "
+
 
 "----Usability and Functionality----------------------------------------------"
+
+" Chords
+call arpeggio#map('i', '', 0, 'jk', '<ESC>')
+call arpeggio#map('i', '', 0, 'kl', '<ESC>$a')
+call arpeggio#map('i', '', 0, 'hj', '<ESC>^i')
+call arpeggio#map('n', '', 0, 'kl', '$')
+call arpeggio#map('n', '', 0, 'hj', '^')
+
 " Case-insensitive search expt when CAP
 set ignorecase
 set smartcase
-
-" Use mouse
-set mouse=a
 
 " Backspace over indents, endofline, insrt
 set backspace=indent,eol,start
@@ -82,25 +90,18 @@ map <C-L> <C-W>l
 map <C-n> :NERDTreeToggle<CR>
 " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Vimtex
-let g:tex_flavor='pdflatex'
-" let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-let g:livepreview_previewer='open -a preview'
-
-" Vimux
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
-" Zoom the tmux runner pane
-map <Leader>vz :VimuxZoomRunner<CR>
-" Vertical split
-let g:VimuxOrientation="h"
+" netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"     autocmd!
+"     autocmd VimEnter * :Vexplore
+"     "autocmd VimEnter * if (argc() > 0 && filereadable(argv()[0])) | wincmd l | endif
+"     autocmd VimEnter * if (argc() > 0 ) | wincmd l | endif
+" augroup END
 
 " Terminal escape
 tnoremap <Esc> <C-\><C-n>
@@ -108,6 +109,16 @@ tnoremap <Esc> <C-\><C-n>
 "----Style--------------------------------------------------------------------"
 " Visual bell instead of audible bell
 set visualbell
+
+set cursorline
+set cursorcolumn
+
+set colorcolumn=80
+
+" Numbering
+set number relativenumber
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber 
 
 " Color scheme
 set termguicolors
@@ -147,9 +158,6 @@ syntax enable
 set nohlsearch
 set incsearch
 set ignorecase
-
-" Numbering
-set nu
 
 " Use soft tabs
 set expandtab

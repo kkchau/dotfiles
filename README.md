@@ -1,6 +1,5 @@
 # .dotfiles
 
-TODO: 
-- options for exclusions
-- Update README for usage
-- Specify platforms
+TODO:
+- Backup and restore functionalities
+- YCM install skip if already installed

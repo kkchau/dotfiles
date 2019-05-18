@@ -1,0 +1,13 @@
+# Environment for all shells
+# Source this document at the end of each .*rc file
+
+if [[ -f ~/.aliases ]]; then
+    . ~/.aliases
+fi
+
+# Aliases ######################################################################
+
+alias rm="rm -i"
+alias hs="history | grep -E "
+alias l="ls -hlrt"
+alias ll="ls -alhrt"
