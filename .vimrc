@@ -134,7 +134,7 @@ colorscheme PaperColor
 let g:airline_powerline_fonts=0
 let g:airline_theme='papercolor'
 " set t_Co=16
-" set term=screen-256color
+set term=xterm-256color
 
 " Status Line
 set laststatus=2
