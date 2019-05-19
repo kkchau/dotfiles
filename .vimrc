@@ -21,10 +21,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-vinegar'
 Plugin 'jalvesaq/Nvim-R'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'benmills/vimux'
 Plugin 'NLKNguyen/papercolor-theme'
 Plugin 'kana/vim-arpeggio'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -88,23 +88,12 @@ map <C-L> <C-W>l
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-" augroup ProjectDrawer
-"     autocmd!
-"     autocmd VimEnter * :Vexplore
-"     "autocmd VimEnter * if (argc() > 0 && filereadable(argv()[0])) | wincmd l | endif
-"     autocmd VimEnter * if (argc() > 0 ) | wincmd l | endif
-" augroup END
 
 " Terminal escape
 tnoremap <Esc> <C-\><C-n>
+
+" Vim-markdown
+let vim_markdown_preview_github=1
 
 "----Style--------------------------------------------------------------------"
 " Visual bell instead of audible bell
@@ -133,7 +122,6 @@ let g:PaperColor_Theme_Options = {
 colorscheme PaperColor
 let g:airline_powerline_fonts=0
 let g:airline_theme='papercolor'
-" set t_Co=16
 set term=xterm-256color
 
 " Status Line
@@ -170,7 +158,3 @@ set autoindent
 
 " Regular Expressions
 set magic
-
-" Snakemake
-au BufNewFile,BufRead Snakefile set syntax=snakemake
-au BufNewFile,BufRead *.smk set syntax=snakemake
