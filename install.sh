@@ -39,6 +39,9 @@ echo "Currently using a ${machine} OS"
 
 if [ ${machine} == "Mac" ]; then
 
+    # Don't create .DS_Store on network drives
+    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
+
     # Mac specific SSH config
     if ! grep -Fxq "Host *" ~/.ssh/config; then
         echo "Updating SSH config"
