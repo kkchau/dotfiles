@@ -85,8 +85,15 @@ if [ ${machine} == "Mac" ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    BREW_INSTALL_TARGETS=(macvim cmake tmux grip)
+    BREW_CASK_INSTALL_TARGETS=(osxfuse)
+    echo "Installing brew cask packages"
+    for package in ${BREW_CASK_INSTALL_TARGETS[@]}; do
+        if ! command -v ${package}; then
+            brew cask install ${package}
+        fi
+    done
 
+    BREW_INSTALL_TARGETS=(macvim cmake tmux grip sshfs)
     echo "Installing brew packages"
     for package in ${BREW_INSTALL_TARGETS[@]}; do
         if ! command -v ${package}; then
