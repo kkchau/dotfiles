@@ -5,6 +5,35 @@ INSTALL_DIR=$(pwd)
 
 DOTFILES=(.environment .tmux.conf .tmux.conf.local .vimrc)
 
+# Make backups of current dotfiles
+OVERWRITE_BACKUPS=Y
+if [[ -d ~/.dotfiles_backup ]]; then
+    while true; do
+        read -p ".dotfiles_backup already exists! Overwrite? [Y/n]: " OVERWRITE
+        case ${OVERWRITE} in
+            [Yy]* )
+                echo "Overwriting..."
+                rm -rf ~/.dotfiles_backup
+                mkdir ~/.dotfiles_backup
+                for dotfile in ${DOTFILES[@]}; do
+                    cp -L ~/${dotfile} ~/.dotfiles_backup
+                    rm -f ~/${dotfile}
+                done
+                break;;
+            [Nn]* ) 
+                echo "Won't overwrite ~/.dotfiles_backup"
+                break;;
+            * ) echo "";;
+        esac
+    done
+else
+    mkdir ~/.dotfiles_backup
+    for dotfile in ${DOTFILES[@]}; do
+        cp -L ~/${dotfile} ~/.dotfiles_backup
+        rm -f ~/${dotfile}
+    done
+fi
+
 # Symlink dotfiles
 for dotfile in ${DOTFILES[@]}; do
     ln -s ${INSTALL_DIR}/${dotfile} ~/${dotfile} 
@@ -59,7 +88,7 @@ if [ ${machine} == "Mac" ]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    BREW_INSTALL_TARGETS=(macvim cmake tmux)
+    BREW_INSTALL_TARGETS=(macvim cmake tmux grip)
 
     echo "Installing brew packages"
     for package in ${BREW_INSTALL_TARGETS[@]}; do
