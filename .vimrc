@@ -22,7 +22,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-vinegar'
 Plugin 'jalvesaq/Nvim-R'
 Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'kana/vim-arpeggio'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'mhinz/vim-startify'
 
@@ -55,13 +54,6 @@ let maplocalleader = "  "
 
 
 "----Usability and Functionality----------------------------------------------"
-
-" Chords
-call arpeggio#map('i', '', 0, 'jk', '<ESC>')
-call arpeggio#map('i', '', 0, 'kl', '<ESC>$a')
-call arpeggio#map('i', '', 0, 'hj', '<ESC>^i')
-call arpeggio#map('n', '', 0, 'kl', '$')
-call arpeggio#map('n', '', 0, 'hj', '^')
 
 " Case-insensitive search expt when CAP
 set ignorecase

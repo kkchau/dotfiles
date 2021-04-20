@@ -1,18 +1,23 @@
 #!/usr/bin/env bash
 
-# This script must be executed from within the .dotfiles directory
-INSTALL_DIR=$(pwd)
+INFO() { echo 2>&1 "INFO: $@" }
+WARN() { echo 2>&1 "WARN: $@" }
 
+CONFIRM_Y="[Yy]"
+CONFIRM_N="[Nn]"
+
+# This script must be executed from within the .dotfiles directory
+INSTALL_DIR=$(pwd -P)
+[[ $(basename ${INSTALL_DIR}) == ".dotfiles" ]] && WARN "Please execute script from .dotfiles directory" && exit 1
 DOTFILES=(.environment .tmux.conf .tmux.conf.local .vimrc)
 
 # Make backups of current dotfiles
-OVERWRITE_BACKUPS=Y
 if [[ -d ~/.dotfiles_backup ]]; then
     while true; do
         read -p ".dotfiles_backup already exists! Overwrite? [Y/n]: " OVERWRITE
         case ${OVERWRITE} in
             [Yy]* )
-                echo "Overwriting..."
+                INFO "Overwriting..."
                 rm -rf ~/.dotfiles_backup
                 mkdir ~/.dotfiles_backup
                 for dotfile in ${DOTFILES[@]}; do
@@ -21,7 +26,7 @@ if [[ -d ~/.dotfiles_backup ]]; then
                 done
                 break;;
             [Nn]* ) 
-                echo "Won't overwrite ~/.dotfiles_backup"
+                INFO "Won't overwrite ~/.dotfiles_backup"
                 break;;
             * ) echo "";;
         esac
@@ -35,24 +40,29 @@ else
 fi
 
 # Symlink dotfiles
+INFO "Symlinking dotfiles..."
 for dotfile in ${DOTFILES[@]}; do
+    INFO "Linking from ${INSTALL_DIR}/${dotfile} to ${HOME}/${dotfile}"
     ln -s ${INSTALL_DIR}/${dotfile} ~/${dotfile} 
 done
 
 # Generate SSH key
-if [ ! -f ~/.ssh/id_rsa ]; then
-    ssh-keygen -t rsa -b 4096 -C "kkhaichau@gmail.com"
-    eval "$(ssh-agent -s)"
-fi
-
-# Install oh-my-zsh
-if [ ! -d ~/.oh-my-zsh ]; then
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-fi
+read -p "Generate SSH key? [Y/n]: " GENERATE_KEY
+if [[ ${GENERATE_KEY} =~ ${CONFIRM_Y} ]]; then
+    if [ ! -f ~/.ssh/id_rsa ]; then
+        read -p "Specify email ID for key: " SSH_EMAIL_COMMENT
+        KEYGEN_CMD=( "ssh-keygen" "-t" "rsa" "-b" "4096" "-C" "${SSH_EMAIL_COMMENT}" )
+        INFO ${KEYGEN_CMD}
+        ${KEYGEN_CMD}
+        eval "$(ssh-agent -s)"
+    else
+        WARN "~/.ssh/id_rsa already exists, won't create a new key"
+    fi
+else
 
 # Source environment file
-if ! grep -Fxq "source ~/.environment" ~/.zshrc; then
-    echo "source ~/.environment" >> ~/.zshrc
+if ! grep -Fxq "source ~/.environment" ~/.bashrc; then
+    echo ". ~/.environment" >> ~/.bashrc
 fi
 
 # If using macOS, get Homebrew
@@ -107,6 +117,7 @@ if [ ${machine} == "Mac" ]; then
 fi
 
 # Get Vundle
+INFO "Installing Vundle for Vim plugins"
 if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 fi

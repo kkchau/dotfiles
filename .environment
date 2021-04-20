@@ -1,11 +1,11 @@
 # Environment for all shells
 # Source this document at the end of each .*rc file
 
+# Aliases ######################################################################
+
 if [[ -f ~/.aliases ]]; then
     . ~/.aliases
 fi
-
-# Aliases ######################################################################
 
 # File management
 
@@ -16,11 +16,3 @@ alias ll="ls -alhrt"
 # History
 
 alias hs="history | grep -E "
-
-# Remote connections
-
-alias rsync='rsync --exclude=.DS_Store'
-
-alias download_brainspan='rsync -avuzbL --delete --exclude=.DS_Store --exclude=.Rproj.user/ kkchau@comet.sdsc.edu:/home/kkchau/BrainSpan_Isoforms ~/Documents/Work/'
-alias upload_brainspan='rsync -avuzbLK --delete  --exclude=.DS_Store --exclude=.Rproj.user/ ~/Documents/Work/BrainSpan_Isoforms kkchau@comet.sdsc.edu:/home/kkchau/'
-alias mntcomet='sshfs -o allow_other,follow_symlinks,defer_permissions kkchau@comet.sdsc.edu:/home/kkchau ~/Remote'
