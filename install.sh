@@ -1,42 +1,38 @@
 #!/usr/bin/env bash
 
-INFO() { echo 2>&1 "INFO: $@" }
-WARN() { echo 2>&1 "WARN: $@" }
+INFO() {
+    echo 2>&1 "INFO: $@"
+}
+WARN() {
+    echo 2>&1 "WARN: $@"
+}
 
 CONFIRM_Y="[Yy]"
 CONFIRM_N="[Nn]"
 
 # This script must be executed from within the .dotfiles directory
 INSTALL_DIR=$(pwd -P)
-[[ $(basename ${INSTALL_DIR}) == ".dotfiles" ]] && WARN "Please execute script from .dotfiles directory" && exit 1
+[[ $(basename ${INSTALL_DIR}) != ".dotfiles" ]] && WARN "Please execute script from .dotfiles directory" && exit 1
 DOTFILES=(.environment .tmux.conf .tmux.conf.local .vimrc)
 
 # Make backups of current dotfiles
-if [[ -d ~/.dotfiles_backup ]]; then
-    while true; do
-        read -p ".dotfiles_backup already exists! Overwrite? [Y/n]: " OVERWRITE
-        case ${OVERWRITE} in
-            [Yy]* )
-                INFO "Overwriting..."
-                rm -rf ~/.dotfiles_backup
-                mkdir ~/.dotfiles_backup
-                for dotfile in ${DOTFILES[@]}; do
-                    cp -L ~/${dotfile} ~/.dotfiles_backup
-                    rm -f ~/${dotfile}
-                done
-                break;;
-            [Nn]* ) 
-                INFO "Won't overwrite ~/.dotfiles_backup"
-                break;;
-            * ) echo "";;
-        esac
-    done
-else
+MAKE_BACKUPS() {
     mkdir ~/.dotfiles_backup
     for dotfile in ${DOTFILES[@]}; do
         cp -L ~/${dotfile} ~/.dotfiles_backup
         rm -f ~/${dotfile}
     done
+}
+if [[ -d ~/.dotfiles_backup ]]; then
+    read -p ".dotfiles_backup already exists! Overwrite? [Y/n]: " OVERWRITE
+    if [[ ${OVERWRITE} =~ ${CONFIRM_Y} ]]; then
+        rm -rf ~/.dotfiles_backup
+        MAKE_BACKUPS
+    else
+        INFO "Won't overwrite ~/.dotfiles_backup"
+    fi
+else
+    MAKE_BACKUPS
 fi
 
 # Symlink dotfiles
@@ -59,10 +55,12 @@ if [[ ${GENERATE_KEY} =~ ${CONFIRM_Y} ]]; then
         WARN "~/.ssh/id_rsa already exists, won't create a new key"
     fi
 else
+    INFO "Won't generate SSH key"
+fi
 
 # Source environment file
-if ! grep -Fxq "source ~/.environment" ~/.bashrc; then
-    echo ". ~/.environment" >> ~/.bashrc
+if ! grep -Fxq "source ~/.environment" ~/.bash_profile; then
+    echo ". ~/.environment" >> ~/.bash_profile
 fi
 
 # If using macOS, get Homebrew
@@ -95,18 +93,10 @@ if [ ${machine} == "Mac" ]; then
     # Brew
     if ! command -v brew; then
         echo "Installing Homebrew"
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
-    BREW_CASK_INSTALL_TARGETS=(osxfuse)
-    echo "Installing brew cask packages"
-    for package in ${BREW_CASK_INSTALL_TARGETS[@]}; do
-        if ! command -v ${package}; then
-            brew cask install ${package}
-        fi
-    done
-
-    BREW_INSTALL_TARGETS=(macvim cmake tmux grip sshfs)
+    BREW_INSTALL_TARGETS=(macvim cmake tmux grip sshfs coreutils)
     echo "Installing brew packages"
     for package in ${BREW_INSTALL_TARGETS[@]}; do
         if ! command -v ${package}; then
@@ -126,8 +116,26 @@ fi
 vim -c ":PluginInstall" -c "qa!"
 
 # If using YouCompleteMe, install it
-if [ -d ~/.vim/bundle/YouCompleteMe ]; then
-    cd ~/.vim/bundle/YouCompleteMe
-    ./install.py
-    cd ${INSTALL_DIR}
+INFO "Install YouCompleteMe to utilize plugin"
+#if [ -d ~/.vim/bundle/YouCompleteMe ]; then
+#    cd ~/.vim/bundle/YouCompleteMe
+#    ./install.py
+#    cd ${INSTALL_DIR}
+#fi
+
+# Welcome message
+read -r -d '' WELCOME_MESSAGE << 'EOF'
+cat << WELCOME_MESSAGE
+# Currently logged in as $(whoami)@$(hostname)
+# Python: $(command -v python); $([[ ! -z $(command -v python) ]] && 2>&1 python --version)
+# Python3: $(command -v python3); $([[ ! -z $(command -v python3) ]] && 2>&1 python3 --version)
+# Docker: $(command -v docker); $([[ ! -z $(command -v docker) ]] && 2>&1 docker --version)
+WELCOME_MESSAGE
+EOF
+grep "WELCOME_MESSAGE" ~/.bash_profile
+if [[ ! $? -eq 0 ]]; then
+    read -p "Add welcome message to login? [Y/n]: " WELCOME_CONFIRM
+    if [[ ${WELCOME_CONFIRM} =~ ${CONFIRM_Y} ]]; then
+        echo -e "${WELCOME_MESSAGE}" >> ~/.bash_profile
+    fi
 fi

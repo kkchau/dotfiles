@@ -1,6 +1,22 @@
 # Environment for all shells
 # Source this document at the end of each .*rc file
 
+# Appearance ##################################################################
+
+# Colors
+
+export CLICOLOR=1
+export LSCOLORS="gafxcxdxbxegedabagacad"
+export LS_COLORS="di=36;40:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+
+# Prompt
+
+ROOT="[ \"root\" = \"\$(whoami)\" ] && echo '#' || echo '$'"
+JOBS="[ -n \"\$(jobs)\" ] && (tput setaf 1 && echo '!') || (tput setaf 2 && echo '_')"
+LC="[ \$? -ne 0 ] && tput setaf 1 || tput setaf 2"
+PS1="\u\H:[\w]\n"
+export PS1="${PS1}\`${JOBS}\`$(tput setaf 8)\`${LC}\`\`${ROOT}\`$(tput sgr0) "
+
 # Aliases ######################################################################
 
 if [[ -f ~/.aliases ]]; then
@@ -10,8 +26,8 @@ fi
 # File management
 
 alias rm="rm -i"
-alias l="ls -hlrt"
-alias ll="ls -alhrt"
+alias l="ls -hlrFt"
+alias ll="ls -alhrFt"
 
 # History
 
