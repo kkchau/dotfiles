@@ -127,9 +127,10 @@ INFO "Install YouCompleteMe to utilize plugin"
 read -r -d '' WELCOME_MESSAGE << 'EOF'
 cat << WELCOME_MESSAGE
 # Currently logged in as $(whoami)@$(hostname)
-# Python: $(command -v python); $([[ ! -z $(command -v python) ]] && 2>&1 python --version)
-# Python3: $(command -v python3); $([[ ! -z $(command -v python3) ]] && 2>&1 python3 --version)
-# Docker: $(command -v docker); $([[ ! -z $(command -v docker) ]] && 2>&1 docker --version)
+# vim: $(command -v vim); $([[ ! -z $(command -v vim) ]] && 2>&1 vim --version | head -n 1)
+# python: $(command -v python); $([[ ! -z $(command -v python) ]] && 2>&1 python --version)
+# python3: $(command -v python3); $([[ ! -z $(command -v python3) ]] && 2>&1 python3 --version)
+# docker: $(command -v docker); $([[ ! -z $(command -v docker) ]] && 2>&1 docker --version)
 WELCOME_MESSAGE
 EOF
 grep "WELCOME_MESSAGE" ~/.bash_profile
