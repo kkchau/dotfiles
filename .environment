@@ -50,12 +50,15 @@ __prompt_command() {
     # Git
     local GIT_STATUS=$(git status 2> /dev/null)
     local GIT_STRING=""
+    TREE_CLEAN_RE="working [a-zA-Z]* clean"
+    BRANCH_AHEAD_RE="Your branch is ahead of"
+    NOTHING_COMMIT_RE="nothing to commit"
     # Color
-    if [[ ! $GIT_STATUS =~ "working [:alpha:]* clean" ]]; then
+    if [[ ! $GIT_STATUS =~ $TREE_CLEAN_RE ]]; then
         GIT_STRING+=$COLOR_RED
-    elif [[ $GIT_STATUS =~ "Your branch is ahead of" ]]; then
+    elif [[ $GIT_STATUS =~ $BRANCH_AHEAD_RE ]]; then
         GIT_STRING+=$COLOR_YELLOW
-    elif [[ $GIT_STATUS =~ "nothing to commit" ]]; then
+    elif [[ $GIT_STATUS =~ $NOTHING_COMMIT_RE ]]; then
         GIT_STRING+=$COLOR_GREEN
     else
         GIT_STRING+=$COLOR_OCHRE
