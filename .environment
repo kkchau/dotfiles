@@ -51,7 +51,7 @@ __prompt_command() {
     local GIT_STATUS=$(git status 2> /dev/null)
     local GIT_STRING=""
     # Color
-    if [[ ! $GIT_STATUS =~ "working directory clean" ]]; then
+    if [[ ! $GIT_STATUS =~ "working [:alpha:]* clean" ]]; then
         GIT_STRING+=$COLOR_RED
     elif [[ $GIT_STATUS =~ "Your branch is ahead of" ]]; then
         GIT_STRING+=$COLOR_YELLOW
