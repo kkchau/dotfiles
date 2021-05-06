@@ -137,8 +137,8 @@ DEFAULT_PYTHON_PACKAGES=(
 if [[ ! -z $(which python3) ]]; then
     read -p "Python3 found on system at $(which python3); create default virtual environment with default packages? [Y/n]: " CREATE_VENV
     if [[ ${CREATE_VENV} =~ ${CONFIRM_Y} ]]; then
-        read -p "Where should the venv be created? [default=~/env]: " VENV_PATH
-        [[ -z $VENV_PATH ]] && VENV_PATH="~/env"
+        read -p "Where should the venv be created? [default=$HOME/env]: " VENV_PATH
+        [[ -z $VENV_PATH ]] && VENV_PATH="$HOME/env"
         python3 -m venv $VENV_PATH
 
         INFO "Default packages will be installed"
