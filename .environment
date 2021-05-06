@@ -1,5 +1,13 @@
 # Environment for all shells
-# Source this document at the end of each .*rc file
+# Source this document at the end of each shell login file
+
+cat << WELCOME_MESSAGE
+# Currently logged in as $(whoami)@$(hostname)
+# vim: $(command -v vim); $([[ ! -z $(command -v vim) ]] && 2>&1 vim --version | head -n 1)
+# python: $(command -v python); $([[ ! -z $(command -v python) ]] && 2>&1 python --version)
+# python3: $(command -v python3); $([[ ! -z $(command -v python3) ]] && 2>&1 python3 --version)
+# docker: $(command -v docker); $([[ ! -z $(command -v docker) ]] && 2>&1 docker --version)
+WELCOME_MESSAGE
 
 # Appearance ##################################################################
 
@@ -10,12 +18,65 @@ export LSCOLORS="gafxcxdxbxegedabagacad"
 export LS_COLORS="di=36;40:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
 
 # Prompt
+PROMPT_COMMAND=__prompt_command
+__prompt_command() {
 
-ROOT="[ \"root\" = \"\$(whoami)\" ] && echo '#' || echo '$'"
-JOBS="[ -n \"\$(jobs)\" ] && (tput setaf 1 && echo '!') || (tput setaf 2 && echo '_')"
-LC="[ \$? -ne 0 ] && tput setaf 1 || tput setaf 2"
-PS1="\u\H:[\w]\n"
-export PS1="${PS1}\`${JOBS}\`$(tput setaf 8)\`${LC}\`\`${ROOT}\`$(tput sgr0) "
+    local EXIT=$?
+    PS1=""
+
+    # Colors
+    local COLOR_RED="\[\e[0;31m\]"
+    local COLOR_YELLOW="\[\e[0;33m\]"
+    local COLOR_GREEN="\[\e[0;32m\]"
+    local COLOR_OCHRE="\[\e[38;5;95m\]"
+    local COLOR_BLUE="\[\e[0;34m\]"
+    local COLOR_WHITE="\[\e[0;37m\]"
+    local COLOR_RESET="\[\e[0m\]"
+
+    # Virtual Environment
+    local pre=""
+    if [ -n "${VIRTUAL_ENV}" ] && [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ]; then
+        if [ "`basename \"${VIRTUAL_ENV}\"`" = "__" ] ; then
+            # special case for Aspen magic directories
+            # see http://www.zetadev.com/software/aspen/
+            PS1+="[`basename \`dirname \"${VIRTUAL_ENV}\"\``] "
+        else
+            PS1+="(`basename \"${VIRTUAL_ENV}\"`) "
+        fi
+    fi
+
+    PS1+="\u@\H : \w "
+
+    # Git
+    local GIT_STATUS=$(git status 2> /dev/null)
+    local GIT_STRING=""
+    # Color
+    if [[ ! $GIT_STATUS =~ "working directory clean" ]]; then
+        GIT_STRING+=$COLOR_RED
+    elif [[ $GIT_STATUS =~ "Your branch is ahead of" ]]; then
+        GIT_STRING+=$COLOR_YELLOW
+    elif [[ $GIT_STATUS =~ "nothing to commit" ]]; then
+        GIT_STRING+=$COLOR_GREEN
+    else
+        GIT_STRING+=$COLOR_OCHRE
+    fi
+    # Branch/Commit
+    local ON_BRANCH="On branch ([^${IFS}]*)"
+    local ON_COMMIT="HEAD detached at ([^${IFS}]*)"
+    if [[ $GIT_STATUS =~ $ON_BRANCH ]]; then
+        GIT_STRING+="(${BASH_REMATCH[1]})"
+    elif [[ $GIT_STATUS =~ $ON_COMMIT ]]; then
+        GIT_STRING+="(${BASH_REMATCH[1]})"
+    fi
+    PS1+="$GIT_STRING$COLOR_RESET\n"
+
+    [ "$EXIT" -ne 0 ] && PS1+="${COLOR_RED}!" || PS1+="${COLOR_GREEN}_"
+    [ -n "$(jobs)" ] && PS1+="${COLOR_OCHRE}*" || PS1+="${COLOR_GREEN}_"
+    [ "root" = "$(whoami)" ] && PS1+='#' || PS1+='$'
+
+
+    PS1+="$COLOR_RESET "
+}
 
 # Aliases ######################################################################
 

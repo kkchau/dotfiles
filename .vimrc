@@ -3,7 +3,6 @@ set encoding=utf-8
 
 
 "----Vundle-------------------------------------------------------------------"
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -15,14 +14,14 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'dense-analysis/ale'
+Plugin 'preservim/tagbar'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'raimondi/delimitmate'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-vinegar'
-Plugin 'jalvesaq/Nvim-R'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'kaicataldo/material.vim'
 Plugin 'mhinz/vim-startify'
 
 " All of your Plugins must be added before the following line
@@ -55,15 +54,15 @@ let maplocalleader = "  "
 
 "----Usability and Functionality----------------------------------------------"
 
+" Capture mouse
+set mouse=a
+
 " Case-insensitive search expt when CAP
 set ignorecase
 set smartcase
 
 " Backspace over indents, endofline, insrt
 set backspace=indent,eol,start
-
-" Cursor pos 
-set ruler
 
 " Confirmation of unsaved changes
 set confirm
@@ -99,21 +98,16 @@ set colorcolumn=80
 " Numbering
 set number relativenumber
 autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber 
+autocmd InsertLeave * :set relativenumber
 
 " Color scheme
 set termguicolors
 set background=dark
-let g:PaperColor_Theme_Options = {
- \    'theme': {
- \        'default': {
- \            'transparent_background': 1
- \        }
- \    }
- \ }
-colorscheme PaperColor
+colorscheme material
+let g:material_theme_style = 'darker'
+let g:material_terminal_italics = 0
 let g:airline_powerline_fonts=0
-let g:airline_theme='papercolor'
+let g:airline_theme='material'
 set term=xterm-256color
 
 " Status Line
@@ -130,6 +124,16 @@ set ruler
 
 " Auto NERDTree
 "autocmd vimenter * NERDTree
+
+" ALE
+let g:ale_linters = {
+            \ 'python': ['pylint'],
+            \}
+let g:ale_fixers = {
+            \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \ 'python': ['black'],
+            \}
+let g:ale_fix_on_save = 1
 
 "----Syntax-------------------------------------------------------------------"
 syntax enable

@@ -39,7 +39,7 @@ fi
 INFO "Symlinking dotfiles..."
 for dotfile in ${DOTFILES[@]}; do
     INFO "Linking from ${INSTALL_DIR}/${dotfile} to ${HOME}/${dotfile}"
-    ln -s ${INSTALL_DIR}/${dotfile} ~/${dotfile} 
+    ln -s ${INSTALL_DIR}/${dotfile} ~/${dotfile}
 done
 
 # Generate SSH key
@@ -56,11 +56,6 @@ if [[ ${GENERATE_KEY} =~ ${CONFIRM_Y} ]]; then
     fi
 else
     INFO "Won't generate SSH key"
-fi
-
-# Source environment file
-if ! grep -Fxq "source ~/.environment" ~/.bash_profile; then
-    echo ". ~/.environment" >> ~/.bash_profile
 fi
 
 # If using macOS, get Homebrew
@@ -96,12 +91,18 @@ if [ ${machine} == "Mac" ]; then
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
 
-    BREW_INSTALL_TARGETS=(macvim cmake tmux grip sshfs coreutils)
+    BREW_INSTALL_TARGETS=(
+        macvim
+        cmake
+        tmux
+        grip
+        sshfs
+        coreutils
+        universal-ctags
+    )
     echo "Installing brew packages"
     for package in ${BREW_INSTALL_TARGETS[@]}; do
-        if ! command -v ${package}; then
-            brew install ${package}
-        fi
+        brew install ${package}
     done
 
 fi
@@ -123,20 +124,29 @@ INFO "Install YouCompleteMe to utilize plugin"
 #    cd ${INSTALL_DIR}
 #fi
 
-# Welcome message
-read -r -d '' WELCOME_MESSAGE << 'EOF'
-cat << WELCOME_MESSAGE
-# Currently logged in as $(whoami)@$(hostname)
-# vim: $(command -v vim); $([[ ! -z $(command -v vim) ]] && 2>&1 vim --version | head -n 1)
-# python: $(command -v python); $([[ ! -z $(command -v python) ]] && 2>&1 python --version)
-# python3: $(command -v python3); $([[ ! -z $(command -v python3) ]] && 2>&1 python3 --version)
-# docker: $(command -v docker); $([[ ! -z $(command -v docker) ]] && 2>&1 docker --version)
-WELCOME_MESSAGE
-EOF
-grep "WELCOME_MESSAGE" ~/.bash_profile
-if [[ ! $? -eq 0 ]]; then
-    read -p "Add welcome message to login? [Y/n]: " WELCOME_CONFIRM
-    if [[ ${WELCOME_CONFIRM} =~ ${CONFIRM_Y} ]]; then
-        echo -e "${WELCOME_MESSAGE}" >> ~/.bash_profile
+# Source environment file
+if ! grep -Fxq "source ~/.environment" ~/.bash_profile; then
+    echo ". ~/.environment" >> ~/.bash_profile
+fi
+
+# Build Python3 Virtual Environment with pre-loaded packages
+DEFAULT_PYTHON_PACKAGES=(
+    pylint
+    black
+)
+if [[ ! -z $(which python3) ]]; then
+    read -p "Python3 found on system at $(which python3); create default virtual environment with default packages? [Y/n]: " CREATE_VENV
+    if [[ ${CREATE_VENV} =~ ${CONFIRM_Y} ]]; then
+        read -p "Where should the venv be created? [default=~/env]: " VENV_PATH
+        [[ -z $VENV_PATH ]] && VENV_PATH="~/env"
+        python3 -m venv $VENV_PATH
+
+        INFO "Default packages will be installed"
+        source $VENV_PATH/bin/activate
+        if [[ $? -ne 0 ]]; then
+            WARN "Could not source $VENV_PATH/bin/activate; won't install packages"
+        else
+            pip install "${DEFAULT_PYTHON_PACKAGES[@]}"
+        fi
     fi
 fi
