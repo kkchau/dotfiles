@@ -130,23 +130,10 @@ if ! grep -Fxq ". ~/.environment" ~/.bash_profile; then
 fi
 
 # Build Python3 Virtual Environment with pre-loaded packages
-DEFAULT_PYTHON_PACKAGES=(
-    pylint
-    black
-)
 if [[ ! -z $(which python3) ]]; then
     read -p "Python3 found on system at $(which python3); create default virtual environment with default packages? [Y/n]: " CREATE_VENV
     if [[ ${CREATE_VENV} =~ ${CONFIRM_Y} ]]; then
-        read -p "Where should the venv be created? [default=$HOME/env]: " VENV_PATH
-        [[ -z $VENV_PATH ]] && VENV_PATH="$HOME/env"
-        python3 -m venv $VENV_PATH
-
-        INFO "Default packages will be installed"
-        source $VENV_PATH/bin/activate
-        if [[ $? -ne 0 ]]; then
-            WARN "Could not source $VENV_PATH/bin/activate; won't install packages"
-        else
-            pip install "${DEFAULT_PYTHON_PACKAGES[@]}"
-        fi
+        . ./src/_make_py_env.sh
+        build_env
     fi
 fi
