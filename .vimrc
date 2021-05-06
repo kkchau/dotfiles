@@ -89,6 +89,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " Tagbar
 let g:tagbar_autofocus=1
+nmap <F8> :TagbarToggle<CR>
 
 "----Style--------------------------------------------------------------------"
 " Visual bell instead of audible bell
