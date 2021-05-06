@@ -125,7 +125,7 @@ INFO "Install YouCompleteMe to utilize plugin"
 #fi
 
 # Source environment file
-if ! grep -Fxq "source ~/.environment" ~/.bash_profile; then
+if ! grep -Fxq ". ~/.environment" ~/.bash_profile; then
     echo ". ~/.environment" >> ~/.bash_profile
 fi
 

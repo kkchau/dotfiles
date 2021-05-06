@@ -77,14 +77,18 @@ map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
 
+" Better buffer navigation
+" Close buffer and auto switch to previous
+nnoremap <leader>d :bp\|bd #<CR>
+
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
 " Terminal escape
 tnoremap <Esc> <C-\><C-n>
 
-" Vim-markdown
-let vim_markdown_preview_github=1
+" Tagbar
+let g:tagbar_autofocus=1
 
 "----Style--------------------------------------------------------------------"
 " Visual bell instead of audible bell
