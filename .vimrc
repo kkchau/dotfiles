@@ -13,9 +13,10 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'dense-analysis/ale'
 Plugin 'preservim/tagbar'
+Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'raimondi/delimitmate'
 Plugin 'vim-airline/vim-airline'
@@ -51,11 +52,16 @@ set showcmd
 let mapleader = " "
 let maplocalleader = "  "
 
+nmap <leader>fw <Plug>(YCMFindSymbolInWorkspace)
+nmap <leader>fd <Plug>(YCMFindSymbolInDocument)
 
 "----Usability and Functionality----------------------------------------------"
 
 " Capture mouse
 set mouse=a
+
+noremap <Leader>y "*y
+noremap <Leader>p "*p
 
 " Case-insensitive search expt when CAP
 set ignorecase
@@ -77,19 +83,38 @@ map <C-K> <C-W>k
 map <C-H> <C-W>h
 map <C-L> <C-W>l
 
-" Better buffer navigation
+" Ignore common
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
 " Close buffer and auto switch to previous
 nnoremap <leader>d :bp\|bd #<CR>
+" Open new window and switch to next buffer
+nnoremap <leader>vs :vs\|bn<CR>
 
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
 " Terminal escape
-tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc><Esc> <C-\><C-n>
 
 " Tagbar
 let g:tagbar_autofocus=1
-nmap <F8> :TagbarToggle<CR>
+nmap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>to :exec "TagbarOpen j"<CR>
+
+" CtrlP
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+let g:ctrlp_extensions = ['tag', 'buffertag']
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|build|__pycache__)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 "----Style--------------------------------------------------------------------"
 " Visual bell instead of audible bell
@@ -120,6 +145,7 @@ set laststatus=2
 let g:airline#extensions#tabline#enabled=1
 let g:airline_section_b = '%{strftime("%c")}'
 let g:airline_section_c = '%F'
+let g:ariline_section_d = '%{gutentags#statusline()}'
 
 " Don't wrap text
 set nowrap
@@ -131,14 +157,17 @@ set ruler
 "autocmd vimenter * NERDTree
 
 " ALE
-let g:ale_linters = {
-            \ 'python': ['pylint'],
-            \}
+" let g:ale_linters = {
+"             \ 'python': ['pylint'],
+"             \}
 let g:ale_fixers = {
             \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \ 'python': ['black'],
+            \ 'python': ['black', 'isort'],
             \}
 let g:ale_fix_on_save = 1
+" let g:ale_lint_delay = 350 " Wait longer before checking for syntax errors
+" let g:ale_python_auto_pipenv = 1
+let g:ale_virtualenv_dir_names = []
 
 "----Syntax-------------------------------------------------------------------"
 syntax enable
