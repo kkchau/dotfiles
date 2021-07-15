@@ -70,41 +70,11 @@ esac
 echo "Currently using a ${machine} OS"
 
 if [ ${machine} == "Mac" ]; then
-
-    # Don't create .DS_Store on network drives
-    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool TRUE
-
-    # Mac specific SSH config
-    if ! grep -Fxq "Host *" ~/.ssh/config; then
-        echo "Updating SSH config"
-        echo "Host *
-    AddKeysToAgent yes
-    UseKeychain yes
-    IdentityFile ~/.ssh/id_rsa
-    " >> ~/.ssh/config
-        ssh-add -K ~/.ssh/id_rsa
+    read -p "Machine discovered to be ${machine}; setup ${machine}? [Y/n]: " MAKE_MAC
+    if [[ ${CREATE_VENV} =~ ${CONFIRM_Y} ]]; then
+        . ./src/install_mac.sh
+        build_mac
     fi
-
-    # Brew
-    if ! command -v brew; then
-        echo "Installing Homebrew"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    fi
-
-    BREW_INSTALL_TARGETS=(
-        macvim
-        cmake
-        tmux
-        grip
-        sshfs
-        coreutils
-        universal-ctags
-    )
-    echo "Installing brew packages"
-    for package in ${BREW_INSTALL_TARGETS[@]}; do
-        brew install ${package}
-    done
-
 fi
 
 # Get Vundle
